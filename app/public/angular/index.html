@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo</title>
+    <link rel="stylesheet" href="http://localhost:8089/assets/font-awesome-4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://localhost:8089/assets/css/style.css">
+</head>
+<body>
+    <div id="app" class="app">
+        <header class="app_header">
+            <h1>Todo</h1>
+        </header>
+        <div class="app_main">
+            <div class="todo" ng-controller="todoCtrl">
+                <form class="todo_form">
+                    <input type="text" name="text" ng-model="text">
+                    <button type="submit" ng-click="add(text)">添加</button>
+                </form>
+                <ul class="todo_list">
+                    <li class="todo_item" ng-repeat="todo in todos track by todo.id">
+                        <a class="todo_btn-done" href="javascript:;" ng-click="done(todo)">
+                            <i ng-class="['fa', {'fa-check-square': todo.done, 'fa-square': !todo.done}]"></i>
+                        </a>
+                        <span ng-class="{'todo_done': todo.done}">{{ todo.text }}</span>
+                        <a class="todo_btn-dump" href="javascript:;" ng-click="remove(todo)">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <footer class="app_footer">
+            <p>lizmlzhou&copy;2016</p>
+        </footer>
+    </div>
+    <script src="http://localhost:8089/angular/node_modules/angular/angular.min.js"></script>
+    <script src="http://localhost:3000/dist/main.js"></script>
+</body>
+</html>

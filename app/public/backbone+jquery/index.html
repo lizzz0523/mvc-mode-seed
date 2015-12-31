@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo</title>
+    <link rel="stylesheet" href="http://localhost:8089/assets/font-awesome-4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://localhost:8089/assets/css/style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="app_header">
+            <h1>Todo</h1>
+        </header>
+        <div class="app_main">
+            <div id="todo" class="todo">
+                <form class="todo_form">
+                    <input type="text" name="text">
+                    <button type="submit">添加</button>
+                </form>
+                <ul class="todo_list">
+                    
+                </ul>
+            </div>
+        </div>
+        <footer class="app_footer">
+            <p>lizmlzhou&copy;2016</p>
+        </footer>
+    </div>
+    <script id="itemTmpl" type="text/template">
+        <a class="todo_btn-done" href="javascript:;" data-done="<%= item.id %>">
+            <i class="fa fa-<% if (item.done) { %>check-square<% } else { %>square<% } %>"></i>
+        </a>
+        <span class="<%= item.done ? 'todo_done' : '' %>"><%= item.text %></span>
+        <a class="todo_btn-dump" href="javascript:;" data-dump="<%= item.id %>">
+            <i class="fa fa-trash"></i>
+        </a>
+    </script>
+    <script src="http://localhost:8089/backbone+jquery/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="http://localhost:8089/backbone+jquery/node_modules/underscore/underscore-min.js"></script>
+    <script src="http://localhost:8089/backbone+jquery/node_modules/backbone/backbone-min.js"></script>
+    <script>
+        Backbone.emulateHTTP = true;
+    </script>
+    <script src="http://localhost:3000/dist/main.js"></script>
+</body>
+</html>
