@@ -2,10 +2,10 @@ var path = require('path'),
     fs = require('fs');
 
 var express = require('express'),
+    compress = require('compression'),
     favicon = require('serve-favicon'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),
-    compress = require('compression'),
 
     app = express();
 

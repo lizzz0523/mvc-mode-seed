@@ -28,12 +28,6 @@ var onCreate = $('#todoForm').form().asEventStream('success', function (event, d
     };
 });
 
-function load(stream) {
-    return stream.merge(Bacon.once({
-        type: 'load'
-    }));
-}
-
 // 拉取数据列表
 function fetch() {
     var xhr = $.ajax({
@@ -43,12 +37,12 @@ function fetch() {
         });
 
     // 转换成stream
-    return load(Bacon.fromPromise(xhr.promise()).map(function (res) {
+    return Bacon.fromPromise(xhr.promise()).map(function (res) {
         return {
             type: 'list',
             data: res.data
         };
-    }));
+    });
 }
 
 // 新增数据项
@@ -64,12 +58,12 @@ function create(text, done) {
         });
 
     // 转换成stream
-    return load(Bacon.fromPromise(xhr.promise()).map(function (res) {
+    return Bacon.fromPromise(xhr.promise()).map(function (res) {
         return {
             type: 'insert',
             data: res.data
         };
-    }));
+    });
 }
 
 // 更新数据项
@@ -84,12 +78,12 @@ function done(id, done) {
         });
 
     // 转换成stream
-    return load(Bacon.fromPromise(xhr.promise()).map(function (res) {
+    return Bacon.fromPromise(xhr.promise()).map(function (res) {
         return {
             type: 'update',
             data: res.data
         };
-    }));
+    });
 }
 
 // 删除数据项
@@ -101,14 +95,14 @@ function destroy(id) {
         });
 
     // 转换成stream
-    return load(Bacon.fromPromise(xhr.promise()).map(function (res) {
+    return Bacon.fromPromise(xhr.promise()).map(function (res) {
         return {
             type: 'remove',
             data: {
                 todo: {id: id}
             }
         };
-    }));
+    });
 }
 
 function render(store) {

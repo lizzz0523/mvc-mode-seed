@@ -1,4 +1,4 @@
-import {LIST_TODO, ADD_TODO, UPDATE_TODO, REMOVE_TODO} from '../action/todoAction';
+import { LIST_TODO, ADD_TODO, UPDATE_TODO, REMOVE_TODO } from '../action/todoAction';
 
 function extend(x, y) {
     var k;
