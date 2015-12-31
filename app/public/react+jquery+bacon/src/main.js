@@ -118,13 +118,26 @@ function render(store) {
     });
 }
 
-fetch()
+function actionLog() {
+    // 动作上报
+}
+
+function errorLog() {
+    // 错误上报
+}
+
+Bacon.once({
+    type: 'fetch'
+})
 .merge(onCreate)
 .merge(onDone)
 .merge(onDestroy)
+// .onValue(actionLog)
 .flatMapLatest(function (action) {
     // 异步拦截器
     switch (action.type) {
+        case 'fetch':
+            return fetch();
         case 'create':
             return create(action.data.text, false);
         case 'done':
@@ -135,29 +148,22 @@ fetch()
             return Bacon.once(action);
     }
 })
+// .onError(errorLog)
 .scan({
-    loading: false,
     todos: []
 }, function (store, action) {
     // 数据reducer
     switch (action.type) {
-        case 'load':
-            store.loading = true;
-            break;
         case 'list':
-            store.loading = false;
             store.todos = action.data.list;
             break;
         case 'insert':
-            store.loading = false;
             store.todos = insert(store.todos, action.data.todo);
             break;
         case 'update':
-            store.loading = false;
             store.todos = replace(store.todos, action.data.todo, 'id');
             break;
         case 'remove':
-            store.loading = false;
             store.todos = remove(store.todos, action.data.todo, 'id');
             break;
     }

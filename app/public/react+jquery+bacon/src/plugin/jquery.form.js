@@ -1,5 +1,6 @@
 var setting = {};
 
+// 用于拦截form表单的提交，并收集表单中的数据，由于下一步的校验
 function form(elem, options) {
     var $form = $(elem);
 
@@ -13,7 +14,7 @@ function form(elem, options) {
                 value = this.value,
                 type = this.type,
                 checked = this.checked,
-                nodeName = this.nodeName;
+                nodeName = this.nodeName.toLowerCase();
 
             if (!type && (nodeName === 'textarea' || nodeName === 'select')) {
                 type = 'text';
